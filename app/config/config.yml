@@ -35,6 +35,7 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    form_themes: ['bootstrap_4_layout.html.twig']
 
 # Doctrine Configuration
 doctrine:
@@ -46,12 +47,11 @@ doctrine:
         user: '%database_user%'
         password: '%database_password%'
         charset: UTF8
-        # if using pdo_sqlite as your database driver:
-        #   1. add the path in parameters.yml
-        #     e.g. database_path: '%kernel.project_dir%/var/data/data.sqlite'
-        #   2. Uncomment database_path in parameters.yml.dist
-        #   3. Uncomment next line:
-        #path: '%database_path%'
+        default_table_options:
+            charset: utf8mb4
+            collate: utf8mb4_unicode_ci
+        types:
+            userRole: AppBundle\Type\UserRoleType
 
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'

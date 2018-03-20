@@ -3,12 +3,12 @@
 namespace AppBundle\Security;
 
 use AppBundle\Entity\User;
-use AppBundle\Entity\Contact;
+use AppBundle\Entity\Note;
 use AppBundle\Enum\UserRole;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-class ContactVoter extends Voter
+class NoteVoter extends Voter
 {
     const VIEW    = 'view';
     const EDIT    = 'edit';
@@ -20,7 +20,7 @@ class ContactVoter extends Voter
             return false;
         }
 
-        if (!($subject instanceof Contact)) {
+        if (!($subject instanceof Note)) {
             return false;
         }
 
@@ -45,12 +45,12 @@ class ContactVoter extends Voter
         }
     }
 
-    private function canManage(Contact $subject, User $user): bool
+    private function canManage(Note $subject, User $user): bool
     {
         if ($user->getRole() == UserRole::ADMIN()) {
             return true;
         }
 
-        return $user === $subject->getOwner();
+        return $user === $subject->getContact()->getOwner();
     }
 }

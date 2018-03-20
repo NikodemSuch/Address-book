@@ -1,0 +1,28 @@
+{% if contact.notes %}
+
+  <div class="list-group notes">
+    <li class="list-group-item"><h4>List of your Notes:</h4></li>
+    {% for note in contact.notes  %}
+      <a href="{{ path('note_show', { 'id': note.id }) }}" class="list-group-item">
+        <ul class="list-inline contact-attributes">
+          <li>{{ note.createdOn|date('Y-m-d H:i:s') }}</li>
+          <li>{{ note.content }}</li>
+        </ul>
+      </a>
+    {% endfor %}
+  </div>
+
+  {% if contact is defined %}
+    <a class="form-button btn btn-primary btn-lg btn-block" href="{{ path('note_new', { 'contact': contact.id }) }}">Create new contact note</a>
+  {% else %}
+    <a class="form-button btn btn-primary btn-lg btn-block" href="{{ path('note_new') }}">Create new contact noten</a>
+  {% endif %}
+
+{% else %}
+  <div class="alert alert-info">
+    Contact list empty!
+  </div>
+{% endif %}
+
+
+

@@ -1,1 +1,126 @@
+body {
+  min-height: 600px;
+  padding: 50px;
+}
 
+// NAVBAR
+
+.navbar-nav > li > a {
+  font-size: 20px;
+  padding: 20px;
+}
+
+.navbar-right {
+  margin: 0;
+}
+
+.dropdown-menu {
+  padding: 0;
+}
+
+.dropdown-menu > li > a {
+  padding: 10px 20px;
+}
+
+.navbar-toggle {
+  float: none;
+  padding: 15px 40px;
+  margin: 8px 15px;
+}
+
+.navbar-collapse, .navbar-header {
+  text-align: center;
+}
+
+.nav .fa {
+  margin-left: 20px
+}
+
+// END NAVBAR
+
+// PAGE AND FORMS
+
+.main-page-section {
+  min-height: 600px;
+}
+
+.form-container, .page-section {
+  min-height: 300px;
+  padding: 50px 25px;
+}
+
+.form-container h2, .page-section h2 {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.page-section .list-group {
+  margin-top: 40px;
+}
+
+.page-section .notes {
+  margin-top: -10px;
+}
+
+.page-section .list-group .list-group-item {
+  margin-top: 10px;
+}
+
+.form-container, .alert {
+  margin-bottom: 0;
+}
+
+.page-section .table {
+  margin: 30px 0;
+}
+
+.form-errors {
+  color: #EB0202;
+}
+
+.form-group {
+  margin: 0;
+}
+
+.form-button {
+  margin: 20px 0;
+}
+
+.form-control-label {
+  border: none;
+  margin: 10px 0 5px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#phoneNumber-fields-list {
+  padding: 0;
+  list-style-type: none;
+}
+
+#phoneNumber-fields-list .form-group {
+  display: flex;
+  margin-bottom: 5px;
+  align-items: center;
+}
+
+#phoneNumber-fields-list .form-group .removePhoneNumberInput {
+  font-size: 22px;
+  padding: 5px;
+}
+
+.contact-attributes {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-size: 16px
+}
+
+.contact-attributes li {
+  min-width: 40%;
+  overflow: hidden;
+  text-align: left;
+}
+
+// PAGE AND FORMS END

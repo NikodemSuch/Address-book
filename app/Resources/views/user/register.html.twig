@@ -1,0 +1,22 @@
+{% extends "user/base.html.twig" %}
+
+{% block form %}
+
+  <div class="form-header">
+    <h1 class="form-title">Create a new Account</h1>
+    <p>or <a href="{{ path('login') }}">sign in to your account</a></p>
+  </div>
+
+  {{ form_start(form) }}
+
+    {% include 'default/formErrors.html.twig' %}
+
+    {{ form_row(form.username) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.plainPassword.first) }}
+    {{ form_row(form.plainPassword.second) }}
+
+    <button class="form-button btn btn-primary btn-lg btn-block" type="submit">Create New Account</button>
+  {{ form_end(form) }}
+
+{% endblock %}

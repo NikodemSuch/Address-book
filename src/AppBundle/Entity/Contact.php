@@ -1,15 +1,195 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Nikodem Such
- * Date: 3/19/2018
- * Time: 3:56 PM
- */
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
+/**
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ContactRepository")
+ */
 class Contact
 {
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+     */
+    private $owner;
+
+    /**
+     * @ORM\Column(type="string", length=200)
+     * @Assert\NotBlank()
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=200, nullable=true)
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $phoneNumbers;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Note", mappedBy="contact")
+     */
+    private $notes;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $inRecycleBin;
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context, $payload)
+    {
+        if (!$this->getPhoneNumbers() && !$this->getAddress()) {
+            $context->buildViolation("You must enter more data.")
+                    ->addViolation();
+
+            return;
+        }
+
+        $phoneNumbers = $this->getPhoneNumbers();
+
+        foreach ($phoneNumbers as $phoneNumber) {
+
+            $depth = 0;
+            $digitCount = 0;
+
+            for ($i = 0; $i < strlen($phoneNumber); $i++) {
+
+                if (is_numeric($phoneNumber[$i])) {
+                    $digitCount++;
+                }
+
+                if ($phoneNumber[$i] == '(') {
+                    $depth++;
+                }
+
+                elseif ($phoneNumber[$i] == ')') {
+                    $depth--;
+                }
+
+                if ($depth < 0) {
+                    $context->buildViolation("Invalid phone number.")
+                            ->addViolation();
+
+                    return;
+                }
+            }
+
+            if ($digitCount < 7) {
+                $context->buildViolation("Invalid phone number.")
+                        ->addViolation();
+                return;
+            }
+
+//            $expr = '/^\(?\+?([0-9]{1,})\)?[-\ ]?\(?([0-9]{1,})\)?[-\ ]?\(?([0-9]{1,})\)?[-\ ]?\(?([0-9]{1,})\)?$/';
+            $expr = '/^(\+{1}|\(\+{1})?\(?([0-9]{1,})\)?[-\ ]?\(?([0-9]{1,})\)?[-\ ]?\(?([0-9]{1,})\)?$/';
+
+            if (!preg_match($expr, $phoneNumber)) {
+                $context->buildViolation("Invalid phone number.")
+                        ->addViolation();
+                return;
+            }
+        }
+    }
+
+    public function __construct()
+    {
+        $this->notes = new ArrayCollection();
+        $this->inRecycleBin = false;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setOwner(User $owner)
+    {
+        $this->owner = $owner;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setName(string $name)
+    {
+        $this->name = $name;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setAddress(?string $address)
+    {
+        $this->address = $address;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setPhoneNumbers(array $phoneNumbers)
+    {
+        $this->phoneNumbers = $phoneNumbers;
+    }
+
+    public function getPhoneNumbers(): ?array
+    {
+        return $this->phoneNumbers;
+    }
+
+    public function setNotes($notes)
+    {
+        $this->notes = $notes;
+    }
+
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Note $note)
+    {
+        $this->notes->add($note);
+    }
+
+    public function removeNote(Note $note)
+    {
+        $this->notes->removeElement($note);
+    }
+
+    public function setInRecycleBin(bool $inRecycleBin)
+    {
+        $this->inRecycleBin = $inRecycleBin;
+    }
+
+    public function isInRecycleBin(): bool
+    {
+        return $this->inRecycleBin;
+    }
+
+    public function __toString() {
+        return $this->name;
+    }
 }

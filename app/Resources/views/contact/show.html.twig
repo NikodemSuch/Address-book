@@ -1,0 +1,57 @@
+{% extends 'default/base.html.twig' %}
+
+{% block page %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <div class="page-section">
+          <h2>Contact data:</h2>
+
+          <table class="table">
+            <tbody>
+              <tr>
+                <th>Name:</th>
+                <td>{{ contact.name }}</td>
+              </tr>
+              <tr>
+                <th>Address:</th>
+                <td>{% if contact.address %}{{ contact.address }}{% else %}No information{% endif %}</td>
+              </tr>
+
+              {% if app.user.role == 'ROLE_ADMIN' %}
+                <tr>
+                  <th>Owner:</th>
+                  <td>{{ contact.owner }}</td>
+                </tr>
+              {% endif %}
+
+              {% for phoneNumber in contact.phoneNumbers %}
+                <tr>
+                  <th>Phone number {{ loop.index }}:</th>
+                  <td>{{ phoneNumber }}</td>
+                </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+
+          {% include 'note/list.html.twig' %}
+
+          <a class="form-button btn btn-primary btn-lg btn-block" href="{{ path('contact_edit', { 'id': contact.id }) }}">Edit</a>
+          {% if contact.inRecycleBin %}
+            {{ form_start(delete_form) }}
+              <button class="form-button btn btn-primary btn-lg btn-block" type="submit">Delete</button>
+            {{ form_end(delete_form) }}
+          {% else %}
+            <a class="form-button btn btn-primary btn-lg btn-block" href="{{ path('contact_recycle', { 'id': contact.id }) }}">Delete</a>
+          {% endif %}
+
+          <a href="{{ path('homepage') }}">Back to the list</a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

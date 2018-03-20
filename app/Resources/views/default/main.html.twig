@@ -1,0 +1,25 @@
+{% extends 'default/base.html.twig' %}
+
+{% block page %}
+
+  <div class="container">
+    <div class="row">
+      <div class="main-page-section col-md-12">
+
+        {% if app.user %}
+            {% include 'contact/list.html.twig' %}
+        {% else %}
+          <div class="row">
+            <div class="page-section col-sm-6 col-sm-offset-3">
+              <div class="alert alert-info">
+                Log in to see more content!
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
