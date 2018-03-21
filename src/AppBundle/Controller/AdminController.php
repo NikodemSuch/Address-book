@@ -2,10 +2,9 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\User;
 use AppBundle\Repository\ContactRepository;
-use AppBundle\Exception\UserNotFoundException;
 use AppBundle\Service\UserManager;
+use AppBundle\Exception\UserNotFoundException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;

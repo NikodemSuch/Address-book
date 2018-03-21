@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Validator\Constraints as AppBundleAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -37,6 +38,7 @@ class Contact
 
     /**
      * @ORM\Column(type="array", nullable=true)
+     * @AppBundleAssert\ValidPhoneNumbers
      */
     private $phoneNumbers;
 
@@ -60,51 +62,6 @@ class Contact
                     ->addViolation();
 
             return;
-        }
-
-        $phoneNumbers = $this->getPhoneNumbers();
-
-        foreach ($phoneNumbers as $phoneNumber) {
-
-            $depth = 0;
-            $digitCount = 0;
-
-            for ($i = 0; $i < strlen($phoneNumber); $i++) {
-
-                if (is_numeric($phoneNumber[$i])) {
-                    $digitCount++;
-                }
-
-                if ($phoneNumber[$i] == '(') {
-                    $depth++;
-                }
-
-                elseif ($phoneNumber[$i] == ')') {
-                    $depth--;
-                }
-
-                if ($depth < 0) {
-                    $context->buildViolation("Invalid phone number.")
-                            ->addViolation();
-
-                    return;
-                }
-            }
-
-            if ($digitCount < 7) {
-                $context->buildViolation("Invalid phone number.")
-                        ->addViolation();
-                return;
-            }
-
-//            $expr = '/^\(?\+?([0-9]{1,})\)?[-\ ]?\(?([0-9]{1,})\)?[-\ ]?\(?([0-9]{1,})\)?[-\ ]?\(?([0-9]{1,})\)?$/';
-            $expr = '/^(\+{1}|\(\+{1})?\(?([0-9]{1,})\)?[-\ ]?\(?([0-9]{1,})\)?[-\ ]?\(?([0-9]{1,})\)?$/';
-
-            if (!preg_match($expr, $phoneNumber)) {
-                $context->buildViolation("Invalid phone number.")
-                        ->addViolation();
-                return;
-            }
         }
     }
 

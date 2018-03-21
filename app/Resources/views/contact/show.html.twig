@@ -26,6 +26,13 @@
                 </tr>
               {% endif %}
 
+              {% if contact.inRecycleBin %}
+                <tr>
+                  <th>Status:</th>
+                  <td>In Recycle Bin</td>
+                </tr>
+              {% endif %}
+
               {% for phoneNumber in contact.phoneNumbers %}
                 <tr>
                   <th>Phone number {{ loop.index }}:</th>

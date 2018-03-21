@@ -43,7 +43,7 @@ class ContactType extends AbstractType
                     $filteredNumbers = array();
 
                     foreach ($formData['phoneNumbers'] as $phoneNumber) {
-                        $phoneNumber = preg_replace('/\-(/', '(', $phoneNumber);
+                        $phoneNumber = preg_replace('/-\(/', '(', $phoneNumber);
                         $phoneNumber = preg_replace('/\)-/', ')', $phoneNumber);
                         // add space before "(" and after ")"
                         // we do this first because we don't want to bother checking if "(" is first character or ")" is last

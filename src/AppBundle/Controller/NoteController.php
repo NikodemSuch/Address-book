@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Note;
-use AppBundle\Entity\User;
 use AppBundle\Form\NoteType;
 use AppBundle\Repository\ContactRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,13 +35,13 @@ class NoteController extends Controller
     public function newAction(Request $request, UserInterface $user)
     {
         $note = new Note();
-        $contacts = $this->contactRepository->findBy(['owner' => $user]);
 
         if ($request->query->get('contact')) {
             $contact = $this->contactRepository->find($request->query->get('contact'));
             $note->setContact($contact);
         }
 
+        $contacts = $this->contactRepository->findBy(['owner' => $user]);
         $form = $this->createForm(NoteType::class, $note, ['contacts' => $contacts]);
         $form->handleRequest($request);
 

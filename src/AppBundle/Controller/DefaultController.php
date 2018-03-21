@@ -2,8 +2,6 @@
 
 namespace AppBundle\Controller;
 
-
-use AppBundle\Entity\User;
 use AppBundle\Repository\ContactRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

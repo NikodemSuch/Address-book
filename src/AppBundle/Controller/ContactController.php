@@ -3,9 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Contact;
-use AppBundle\Entity\User;
 use AppBundle\Form\ContactType;
-use AppBundle\Repository\ContactRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -21,12 +19,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class ContactController extends Controller
 {
     private $em;
-    private $contactRepository;
 
-    public function __construct(EntityManagerInterface $em, ContactRepository $contactRepository)
+    public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
-        $this->contactRepository = $contactRepository;
     }
 
     /**
