@@ -43,7 +43,7 @@ class Contact
     private $phoneNumbers;
 
     /**
-     * @ORM\OneToMany(targetEntity="Note", mappedBy="contact")
+     * @ORM\OneToMany(targetEntity="Note", mappedBy="contact", cascade={"persist", "remove"})
      */
     private $notes;
 

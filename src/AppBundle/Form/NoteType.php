@@ -17,10 +17,6 @@ class NoteType extends AbstractType
         $contacts = $options['contacts'];
         $builder
             ->add('content', TextAreaType::class)
-            ->add('createdOn', DateTimeType::class, [
-                'label' => 'Date and Time:',
-                'label_attr' => ['class' => 'form-control-label'],
-            ])
             ->add('contact', EntityType::class, [
                 'class' => 'AppBundle:Contact',
                 'choices' => $contacts,

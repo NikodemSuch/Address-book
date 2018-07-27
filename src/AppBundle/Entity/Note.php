@@ -30,7 +30,7 @@ class Note
     private $createdOn;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Contact", inversedBy="notes", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Contact", inversedBy="notes")
      */
     private $contact;
 

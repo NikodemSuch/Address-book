@@ -48,6 +48,7 @@ class NoteController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($note);
             $this->em->flush();
+            $this->addFlash('success', 'Note Created.');
 
             return $this->redirectToRoute('note_show', [
                 'id' => $note->getId()
@@ -87,6 +88,7 @@ class NoteController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->em->flush();
+            $this->addFlash('success', 'Note Updated.');
 
             return $this->redirectToRoute('note_show', [
                 'id' => $note->getId()
@@ -112,9 +114,12 @@ class NoteController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->remove($note);
             $this->em->flush();
+            $this->addFlash('success', 'Note Deleted.');
         }
 
-        return $this->redirectToRoute('homepage');
+        return $this->redirectToRoute('contact_show', [
+            'id' => $note->getContact()->getId()
+        ]);
     }
 
     /**
