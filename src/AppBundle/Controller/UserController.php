@@ -89,6 +89,7 @@ class UserController extends Controller
 
         if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
             $this->em->flush();
+            $this->addFlash('success', 'Settings Updated.');
 
             return $this->redirectToRoute('homepage');
         }
@@ -112,6 +113,7 @@ class UserController extends Controller
             $password = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
             $this->em->flush();
+            $this->addFlash('success', 'Password Updated.');
 
             return $this->redirectToRoute('homepage');
         }

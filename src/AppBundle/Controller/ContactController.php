@@ -39,6 +39,7 @@ class ContactController extends Controller
             $contact->setOwner($user);
             $this->em->persist($contact);
             $this->em->flush();
+            $this->addFlash('success', 'Contact Created.');
 
             return $this->redirectToRoute('contact_show', [
                 'id' => $contact->getId()
@@ -77,9 +78,9 @@ class ContactController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-
             $this->em->persist($contact);
             $this->em->flush();
+            $this->addFlash('success', 'Contact Updated.');
 
             return $this->redirectToRoute('contact_show', [
                 'id' => $contact->getId()
@@ -101,6 +102,7 @@ class ContactController extends Controller
         $contact->setInRecycleBin(true);
         $this->em->persist($contact);
         $this->em->flush();
+        $this->addFlash('success', 'Contact Recycled.');
 
         return $this->redirectToRoute('homepage');
     }
@@ -118,6 +120,7 @@ class ContactController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->remove($contact);
             $this->em->flush();
+            $this->addFlash('success', 'Contact Deleted.');
         }
 
         return $this->redirectToRoute('homepage');
