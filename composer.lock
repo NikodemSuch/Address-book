@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "7ddcf1affe59642fbfa4ad87e89ea5e2",
@@ -770,12 +770,12 @@
             "version": "v2.6.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/doctrine2.git",
+                "url": "https://github.com/doctrine/orm.git",
                 "reference": "87ee409783a4a322b5597ebaae558661404055a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/87ee409783a4a322b5597ebaae558661404055a7",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/87ee409783a4a322b5597ebaae558661404055a7",
                 "reference": "87ee409783a4a322b5597ebaae558661404055a7",
                 "shasum": ""
             },
@@ -2372,20 +2372,21 @@
                 }
             ],
             "description": "This bundle generates code for you",
+            "abandoned": true,
             "time": "2017-12-07T15:36:41+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v4.0.6",
+            "version": "v4.1.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "14ffbbe2a72d0f6339b24eb830dd38cf63ba6630"
+                "reference": "cc546f59d55f63010ff4d4f40a2af39526842524"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/14ffbbe2a72d0f6339b24eb830dd38cf63ba6630",
-                "reference": "14ffbbe2a72d0f6339b24eb830dd38cf63ba6630",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/cc546f59d55f63010ff4d4f40a2af39526842524",
+                "reference": "cc546f59d55f63010ff4d4f40a2af39526842524",
                 "shasum": ""
             },
             "require": {
@@ -2404,7 +2405,7 @@
             "type": "symfony-bridge",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.0-dev"
+                    "dev-master": "4.1-dev"
                 },
                 "thanks": {
                     "name": "phpunit/phpunit",
@@ -2438,7 +2439,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2018-02-19T16:50:22+00:00"
+            "time": "2019-04-16T09:37:00+00:00"
         }
     ],
     "aliases": [],
